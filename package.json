@@ -18,7 +18,9 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@types/node": "^18.7.14",
-    "solid-js": "^1.5.1"
+    "solid-js": "^1.5.1",
+    "ulid": "^2.3.0"
   }
 }

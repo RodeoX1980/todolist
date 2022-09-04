@@ -4,11 +4,11 @@ import Input from "./Input";
 import TodoList from "./TodoList";
 
 const TodoPage: Component = () => {
-  const { state, addTodo, toggleTodo, removeTodo } = useTodo();
+  const { state, addTodo, toggleTodo, removeTodo, addTag, removeTag } = useTodo();
 
   return (
     <>
-      <div class="flex justify-center bg-white h-screen pt-4">
+      <div class="flex justify-center bg-white h-screen pt-4 max-w-screen-xl">
         <div>
           <div>
             <h1 class="text-4xl font-sans">Todo</h1>
@@ -19,6 +19,8 @@ const TodoPage: Component = () => {
               todos={state.todos}
               toggleTodo={toggleTodo}
               removeTodo={removeTodo}
+              addTag={addTag}
+              removeTag={removeTag}
             />
           </div>
         </div>

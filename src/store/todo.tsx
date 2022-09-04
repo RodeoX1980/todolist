@@ -22,7 +22,6 @@ export const useTodo = () => {
       ...todos,
       { id: ulid(), description: text, isCompleted: false, tags: [] },
     ]);
-    console.log("add todo:", state.todos);
   };
 
   const removeTodo = (id: string) => {
@@ -39,11 +38,11 @@ export const useTodo = () => {
     setState("todos", (todo) => todo.id === id, "tags",
       (tags) => {
         if (!tags.includes(tagName)) {
-          tags.push(tagName);
+          const newList = [...tags, tagName];
+          return newList;
         }
         return tags;
       });
-    console.log(state.todos);
   }
 
   const removeTag = (id: string, tagName: string) => {

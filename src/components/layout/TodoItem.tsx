@@ -35,10 +35,12 @@ const TodoItem: Component<Props> = (props) => {
     });
   });
 
+  console.log("タグ状態: ", todo.tags);
+
   return (
     <div>
-      <li class="pt-2 ml-2">
-        <div class="pb-2 flex justify-between max-w-xs mr-4 border-b-2 border-gray-100" onContextMenu={handleContextMenu}>
+      <li class="pt-2 ml-2 w-lg max-w-screen-lg">
+        <div class="pb-2 flex justify-between max-w-screen-xl mr-4 border-b-2 border-gray-100" onContextMenu={handleContextMenu}>
           <div>
             <input type="checkbox" id={todo.id} class="h-4 w-4 rounded-sm shadow" onChange={() => toggleTodo(todo.id)} value="" />
             <label class="pl-2 pr-2 text-gray-800" for={todo.id}>
@@ -50,10 +52,31 @@ const TodoItem: Component<Props> = (props) => {
               </Show>
             </label>
           </div>
-          <div>
+          <div class="justify-item-end">
             <For each={todo.tags}>
               {(tag) => (
-                <label>{tag}</label>
+                <div class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-hard-drive mr-2"
+                  >
+                    <line x1="22" y1="12" x2="2" y2="12"></line>
+                    <path
+                      d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"
+                    ></path>
+                    <line x1="6" y1="16" x2="6.01" y2="16"></line>
+                    <line x1="10" y1="16" x2="10.01" y2="16"></line>
+                  </svg>
+                  {tag}
+                </div>
               )}
             </For>
           </div>

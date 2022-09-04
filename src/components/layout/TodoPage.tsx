@@ -8,7 +8,7 @@ const TodoPage: Component = () => {
 
   return (
     <>
-      <div class="flex justify-center bg-white h-screen pt-4">
+      <div class="flex justify-center bg-white h-screen pt-4 max-w-screen-xl">
         <div>
           <div>
             <h1 class="text-4xl font-sans">Todo</h1>

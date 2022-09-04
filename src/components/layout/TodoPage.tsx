@@ -4,7 +4,7 @@ import Input from "./Input";
 import TodoList from "./TodoList";
 
 const TodoPage: Component = () => {
-  const { state, addTodo, toggleTodo, removeTodo } = useTodo();
+  const { state, addTodo, toggleTodo, removeTodo, addTag, removeTag } = useTodo();
 
   return (
     <>
@@ -19,6 +19,8 @@ const TodoPage: Component = () => {
               todos={state.todos}
               toggleTodo={toggleTodo}
               removeTodo={removeTodo}
+              addTag={addTag}
+              removeTag={removeTag}
             />
           </div>
         </div>

@@ -4,7 +4,7 @@ import { ulid } from 'ulid';
 export type Todo = {
   id: string;
   description: string;
-  tags: Set<string>;
+  tags: string[];
   isCompleted: boolean;
 }
 
@@ -20,8 +20,9 @@ export const useTodo = () => {
   const addTodo = (text: string) => {
     setState("todos", (todos) => [
       ...todos,
-      { id: ulid(), description: text, isCompleted: false, tags: new Set<string>() },
+      { id: ulid(), description: text, isCompleted: false, tags: [] },
     ]);
+    console.log("add todo:", state.todos);
   };
 
   const removeTodo = (id: string) => {
@@ -29,25 +30,24 @@ export const useTodo = () => {
   };
 
   const toggleTodo = (id: string) => {
-    setState(
-      "todos",
-      (todo) => todo.id === id,
-      "isCompleted",
-      (completed) => !completed
+    setState("todos", (todo) => todo.id === id,
+      "isCompleted", (completed) => !completed,
     );
   };
 
   const addTag = (id: string, tagName: string) => {
-    setState("todos", (todo) => todo.id === id, "tags", (tags) => tags.add(tagName));
+    setState("todos", (todo) => todo.id === id, "tags",
+      (tags) => {
+        if (!tags.includes(tagName)) {
+          tags.push(tagName);
+        }
+        return tags;
+      });
+    console.log(state.todos);
   }
 
   const removeTag = (id: string, tagName: string) => {
-    setState("todos", (todo) => todo.id === id, "tags", (tags) => {
-      if (tags.has(tagName)) {
-        tags.delete(tagName);
-      }
-      return tags;
-    });
+    setState("todos", (todo) => todo.id === id, "tags", (tags) => tags.filter((tag) => tag !== tagName));
   }
 
   return {

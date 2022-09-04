@@ -6,6 +6,8 @@ type Props = {
   todos: Readonly<Todo[]>;
   toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
+  addTag: (id: string, tagName: string) => void;
+  removeTag: (id: string, tagName: string) => void;
 }
 
 const TodoList: Component<Props> = (props) => {
@@ -17,6 +19,8 @@ const TodoList: Component<Props> = (props) => {
             todo={item}
             toggleTodo={props.toggleTodo}
             removeTodo={props.removeTodo}
+            addTag={props.addTag}
+            removeTag={props.removeTag}
           />
         )}
       </For>

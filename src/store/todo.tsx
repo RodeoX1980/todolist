@@ -4,6 +4,7 @@ import { ulid } from 'ulid';
 export type Todo = {
   id: string;
   description: string;
+  tags: Set<string>;
   isCompleted: boolean;
 }
 
@@ -19,13 +20,13 @@ export const useTodo = () => {
   const addTodo = (text: string) => {
     setState("todos", (todos) => [
       ...todos,
-      { id: ulid(), description: text, isCompleted: false },
+      { id: ulid(), description: text, isCompleted: false, tags: new Set<string>() },
     ]);
   };
 
   const removeTodo = (id: string) => {
     setState("todos", (todos) => [...todos.filter((todo) => todo.id !== id)]);
-  }
+  };
 
   const toggleTodo = (id: string) => {
     setState(
@@ -33,13 +34,28 @@ export const useTodo = () => {
       (todo) => todo.id === id,
       "isCompleted",
       (completed) => !completed
-    )
+    );
+  };
+
+  const addTag = (id: string, tagName: string) => {
+    setState("todos", (todo) => todo.id === id, "tags", (tags) => tags.add(tagName));
+  }
+
+  const removeTag = (id: string, tagName: string) => {
+    setState("todos", (todo) => todo.id === id, "tags", (tags) => {
+      if (tags.has(tagName)) {
+        tags.delete(tagName);
+      }
+      return tags;
+    });
   }
 
   return {
     state,
     addTodo,
     removeTodo,
-    toggleTodo
+    toggleTodo,
+    addTag,
+    removeTag
   }
 }
